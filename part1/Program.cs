@@ -24,14 +24,14 @@ namespace dotNet5780_01_7922_4084
             Console.ReadKey();
         }
 
-        private static void print(int[] a)
+        private static void print(int[] a)// prints out the arrys
         {
             for (int i = 1; i < 20; i++)
                 Console.Write("{0 ,-3} ", a[i]);
             Console.WriteLine();
         }
 
-        private static void fill(Random rnd, int[] a)
+        private static void fill(Random rnd, int[] a)//fills arrays a,b in random numbers
         {
             for (int i = 0; i < 20; i++)
                 a[i] = rnd.Next(18, 122);
