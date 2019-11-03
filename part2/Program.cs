@@ -42,7 +42,7 @@ namespace part2
 
         }
 
-        private static void taken(Boolean[,] arr)
+        private static void newDate(Boolean[,] arr)//checks if the date is avalible
         {
             int month, date, days;
             Console.WriteLine("Enter month:");
@@ -56,12 +56,12 @@ namespace part2
                 throw new NotImplementedException();
         }
 
-        private static void all(Boolean[,] arr)
+        private static void all(Boolean[,] arr)//prints out all the calnder
         {
             throw new NotImplementedException();
         }
 
-        private static void newDate(Boolean[,] arr)
+        private static void taken (Boolean[,] arr)//prints how many days are taken
         {
             throw new NotImplementedException();
         }
