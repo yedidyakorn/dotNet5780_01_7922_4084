@@ -17,9 +17,11 @@ namespace part2
                 for (int j = 0; j < arr.GetLength(1); j++)
                     arr[i, j] = false;
             }
-            while (choice != 0)
+
+            if (choice != 0)
             {
                 Console.WriteLine("Enter Choice: 1-enter new vication.\t 2-show whole list. \t 3-show taken dates.\t 0-exit");
+
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -39,7 +41,6 @@ namespace part2
                         break;
                 }
             }
-
         }
 
         private static void newDate(Boolean[,] arr)//checks if the date is avalible
@@ -56,14 +57,40 @@ namespace part2
                 throw new NotImplementedException();
         }
 
-        private static void all(Boolean[,] arr)//prints out all the calnder
-        {
-            throw new NotImplementedException();
-        }
 
-        private static void taken (Boolean[,] arr)//prints how many days are taken
+        private static void all(bool[,] arr)
+        { 
+
+            int day = 1, month = 1;
+            bool isCounting = false;
+            while (month < 12)
+            {
+                month += day / 32;
+                day = day % 31 == 0 ? 31 : day % 31;               
+                if (arr[ month - 1, day - 1] == true && !isCounting )
+                {
+                    Console.Write("Start date : " + day + "/" + month);
+                    isCounting = true;
+                } else if (arr[month - 1, day - 1] == false && isCounting)
+                {              
+                    Console.WriteLine(" , End date : " + (day -1 == 0 ? 31: day - 1) + "/" +  ((day-1 == 0) ? month-1:  month));
+                    isCounting = false;
+                }
+
+                day++; 
+            }           
+        }              
+        
+
+        private static void taken (bool[,] arr)//prints how many days are taken
         {
-            throw new NotImplementedException();
+            int counter = 0;
+            for (int i = 0; i < arr.GetLength(0); i++)
+                for (int j = 0; j < arr.GetLength(1); j++)
+                    if (arr[i, j] == true)
+                        counter++;     //Summarize the busy days
+            float percentageOfOccupancy = (((float)counter / 372)*100);   //Percentage calculation
+            Console.WriteLine("The number of busy days per year:{0}\nPercentage of annual occupancy:{1}% ", counter,  percentageOfOccupancy);
         }
     }
 }
