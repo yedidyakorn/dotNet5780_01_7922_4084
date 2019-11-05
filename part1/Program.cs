@@ -10,31 +10,33 @@ namespace dotNet5780_01_7922_4084
     {
         static void Main(string[] args)
         {
-            Random rnd = new Random(DateTime.Now.Millisecond);
-            int[] a = new int[20];
-            int[] b = new int[20];
-            int[] c = new int[20];
-            fill(rnd, a);
-            fill(rnd, b);
+            Random rnd = new Random(DateTime.Now.Millisecond); //Grates numbers
+            //Create arrays
+            int[] A = new int[20]; 
+            int[] B = new int[20]; 
+            int[] C = new int[20]; 
+            fill(rnd, A);
+            fill(rnd, B);
             for (int i = 0; i < 20; i++)
-                c[i] = Math.Abs(a[i] - b[i]);
-            print(a);
-            print(b);
-            print(c);
+                C[i] = Math.Abs(A[i] - B[i]);  //The difference between the numbers
+
+            print(A);
+            print(B);
+            print(C);
             Console.ReadKey();
         }
 
-        private static void print(int[] a)// prints out the arrys
+        private static void print(int[] arry)// prints out the arrys
         {
             for (int i = 1; i < 20; i++)
-                Console.Write("{0 ,-3} ", a[i]);
+                Console.Write("{0 ,-3} ", arry[i]);
             Console.WriteLine();
         }
 
-        private static void fill(Random rnd, int[] a)//fills arrays a,b in random numbers
+        private static void fill(Random rnd, int[] arry)//fills arrays a,b in random numbers
         {
             for (int i = 0; i < 20; i++)
-                a[i] = rnd.Next(18, 122);
+                arry[i] = rnd.Next(18, 122);
         }
     }
 }
