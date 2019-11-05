@@ -17,8 +17,7 @@ namespace part2
                 for (int j = 0; j < arr.GetLength(1); j++)
                     arr[i, j] = false;
             }
-
-            if (choice != 0)
+            while (choice != 0)
             {
                 Console.WriteLine("Enter Choice: 1-enter new vication.\t 2-show whole list. \t 3-show taken dates.\t 0-exit");
 
@@ -63,9 +62,8 @@ namespace part2
 
             int day = 1, month = 1;
             bool isCounting = false;
-            while (month < 12)
-            {
-                month += day / 32;
+            while (month < 13)
+            {             
                 day = day % 31 == 0 ? 31 : day % 31;               
                 if (arr[ month - 1, day - 1] == true && !isCounting )
                 {
@@ -76,8 +74,8 @@ namespace part2
                     Console.WriteLine(" , End date : " + (day -1 == 0 ? 31: day - 1) + "/" +  ((day-1 == 0) ? month-1:  month));
                     isCounting = false;
                 }
-
-                day++; 
+                day++;
+                month += day / 32;
             }           
         }              
         
