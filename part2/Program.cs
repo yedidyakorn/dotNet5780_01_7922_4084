@@ -17,6 +17,7 @@ namespace part2
                 for (int j = 0; j < arr.GetLength(1); j++)
                     arr[i, j] = false;
             }
+
             while (choice != 0)
             {
                 Console.WriteLine("Enter Choice: 1-enter new vication.\t 2-show whole list. \t 3-show taken dates.\t 0-exit");
@@ -73,14 +74,16 @@ namespace part2
             {
                 //calc current day - Reset to 1 if over 31
                 //set counting vaction period = true
-                day = day % 31 == 0 ? 31 : day % 31;               
-                if (arr[ month - 1, day - 1] == true && !isCounting )
+                day = day % 31 == 0 ? 31 : day % 31;
+                var currentDay = arr[month - 1, day - 1];
+                if (currentDay == true && !isCounting )
                 {
                     Console.Write("Start date : " + day + "/" + month);
                     isCounting = true;
                 }
                 //if vaction ended, isCounting = false
-                else if (arr[month - 1, day - 1] == false && isCounting)
+                //or its the last day of the year
+                else if ((currentDay == false || (currentDay == true && day == 31 && month == 12)) && isCounting)
                 {              
                     Console.WriteLine(" , End date : " + (day -1 == 0 ? 31: day - 1) + "/" +  ((day-1 == 0) ? month-1:  month));
                     isCounting = false;
@@ -89,7 +92,7 @@ namespace part2
                 day++;
                 //calc if month should be increased
                 month += day / 32;
-            }           
+            }
         }              
         
 
