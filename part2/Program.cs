@@ -43,98 +43,79 @@ namespace part2
 
         }
 
-        private static void newDate(bool[,] arr)//checks if the date is avalible
+        private static void newDate(bool[,] max)//checks if the date is avalible
         {
-            int month, day, duration,endM,endD;
+            int month, day, duration,begD,endD;
             Console.WriteLine("Enter month:");
             month = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter date:");
             day = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter how many days:");
             duration = Convert.ToInt32(Console.ReadLine());
-            endM = month + ((day + duration) / 31);
-            endD = duration + day - (31 * (endM - month));
-            if(month>12||month<1||endM>12||day<1||day>31||endD>31||endD<1||duration<2)//checks input
+            bool[] arr = new bool[372];
+            maxToArry(max,arr);
+            begD = (month-1) * 31 + day-1;
+            endD = begD + duration;
+            if(month>12||month<1||day<1||day>31||endD>372||duration<2)//checks input
             {
                 Console.WriteLine("ERROR - invalid input.");
                 return;
-            }
-            if (month==endM)
+            }                       
+            if((arr[begD]==true&&arr[begD+1]==true)||(arr[endD]==true&&arr[endD-1]==true))
             {
-                for (int i = day; i < endD-1; i++)//checks if avilable
-                {
-                    if (nights[month-1, i-1] == true)
-                    {
-                        Console.WriteLine("not avalible these dates");
-                        return;
-                    }
-                }
-                for (int i = day; i < endD - 1; i++)//marks as taken
-                {
-                    nights[month - 1, i - 1] = true;
-                    arr[month - 1, i - 1] = true;
-                }
-                arr[month - 1, endD-1] = true;
-                return;
+                Console.WriteLine("not avalible these dates");
+                 return;
             }
-            else
+            for (int i=begD+1;i<endD-1;i++)
             {
-                for (int i = day; i < 32; i++)//checks if avilable- first month
+                if(arr[i]==true)
                 {
-                    if (nights[month - 1, i - 1] == true)
-                    {
-                        Console.WriteLine("not avalible these dates");
-                        return;
-                    }
+                    Console.WriteLine("not avalible these dates");
+                    return;
                 }
-                for(int i=month+1;i< endM-1;i++)
-                {
-                    for (int j = 1; j < 32; j++)//checks if avilable- midlle monthes
-                    {
-                        if (nights[i - 1, j - 1] == true)
-                        {
-                            Console.WriteLine("not avalible these dates");
-                            return;
-                        }
-                    }
-                }
-                for (int i = 1; i < endD; i++)//checks if avilable- last month
-                {
-                    if (nights[endM-1, i - 1] == true)
-                    {
-                        Console.WriteLine("not avalible these dates");
-                        return;
-                    }
-                }
-                for (int i = day; i < 32; i++)//marks as taken- first month
-                {
-                    nights[month - 1, i - 1] = true;
-                    arr[month - 1, i - 1] = true;
-                }
-                for (int i = month + 1; i < endM - 1; i++)
-                {
-                    for (int j = 1; j < 32; j++)//marks as taken- midlle monthes
-                    {
-                        nights[i - 1, j - 1] = true;
-                        arr[i - 1, j - 1] = true;
-                    }
-                }
-                for (int i = 1; i < endD; i++)//marks as taken- last month
-                {
-                    nights[endM - 1, i - 1] = true;
-                    arr[endM - 1, i - 1] = true;
-                }
-                arr[month - 1, endD - 1] = true;
-                return;
             }
-                throw new NotImplementedException();
+            for (int i = begD; i < endD; i++)
+                arr[i] = true;
+            arrayToMax(max,arr);
+            return;
+            throw new NotImplementedException();
+            }
+           
+      
+
+        private static void all(bool[,] max)
+        {
         }
 
-        private static void all(bool[,] arr)//prints out all the calnder
+        private static void maxToArry(bool[,] max,bool[]arr)//convorts a array to matrix 
         {
+            int k = 0;
+            for (int i = 0; i < 12; i++)
+            {
+                for (int j = 0; j < 31; j++)
+                {
+                    arr[k] = max[i, j];
+                    k++;
+                }
+            }
+            return;
             throw new NotImplementedException();
         }
 
+        private static void arrayToMax(bool[,] max, bool[] arr)//convorts a matrix to array
+        {
+            int k = 0;
+            for (int i = 0; i < 12; i++)
+            {
+                for (int j = 0; j < 31; j++)
+                {
+                    max[i,j] = arr[k];
+                    k++;
+                }
+            }
+            return;
+            throw new NotImplementedException();
+        }
         private static void taken (bool[,] arr)//prints how many days are taken
         {
             throw new NotImplementedException();
