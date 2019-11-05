@@ -80,12 +80,6 @@ namespace part2
             return;
             throw new NotImplementedException();
             }
-           
-      
-
-        private static void all(bool[,] max)
-        {
-        }
 
         private static void maxToArry(bool[,] max,bool[]arr)//convorts a array to matrix 
         {
@@ -116,9 +110,48 @@ namespace part2
             return;
             throw new NotImplementedException();
         }
-        private static void taken (bool[,] arr)//prints how many days are taken
+
+        private static void all(bool[,] arr)
         {
-            throw new NotImplementedException();
+            int day = 1, month = 1;
+            //flag for vacation period
+            bool isCounting = false;
+
+            while (month < 13)
+            {
+                //calc current day - Reset to 1 if over 31
+                //set counting vaction period = true
+                day = day % 31 == 0 ? 31 : day % 31;
+                var currentDay = arr[month - 1, day - 1];
+                if (currentDay == true && !isCounting)
+                {
+                    Console.Write("Start date : " + day + "/" + month);
+                    isCounting = true;
+                }
+                //if vaction ended, isCounting = false
+                //or its the last day of the year
+                else if ((currentDay == false || (currentDay == true && day == 31 && month == 12)) && isCounting)
+                {
+                    Console.WriteLine(" , End date : " + (day - 1 == 0 ? 31 : day - 1) + "/" + ((day - 1 == 0) ? month - 1 : month));
+                    isCounting = false;
+                }
+                //increase day 
+                day++;
+                //calc if month should be increased
+                month += day / 32;
+            }
         }
+
+        private static void taken(bool[,] arr)//prints how many days are taken
+        {
+            int counter = 0;
+            for (int i = 0; i < arr.GetLength(0); i++)
+                for (int j = 0; j < arr.GetLength(1); j++)
+                    if (arr[i, j] == true)
+                        counter++;     //Summarize the busy days
+            float percentageOfOccupancy = (((float)counter / 372) * 100);   //Percentage calculation
+            Console.WriteLine("The number of busy days per year:{0}\nPercentage of annual occupancy:{1}% ", counter, percentageOfOccupancy);
+        }
+
     }
 }
