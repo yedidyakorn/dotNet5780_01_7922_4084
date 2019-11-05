@@ -51,30 +51,43 @@ namespace part2
             date = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Enter how many days::");
             days = Convert.ToInt32(Console.ReadLine());
-            if (arr[month - 1, date - 1])
+           
 
-                throw new NotImplementedException();
+      
         }
+
+
+
+
 
 
         private static void all(bool[,] arr)
         { 
 
             int day = 1, month = 1;
+
+            //flag for vacation period
             bool isCounting = false;
+
             while (month < 13)
-            {             
+            {
+                //calc current day - Reset to 1 if over 31
+                //set counting vaction period = true
                 day = day % 31 == 0 ? 31 : day % 31;               
                 if (arr[ month - 1, day - 1] == true && !isCounting )
                 {
                     Console.Write("Start date : " + day + "/" + month);
                     isCounting = true;
-                } else if (arr[month - 1, day - 1] == false && isCounting)
+                }
+                //if vaction ended, isCounting = false
+                else if (arr[month - 1, day - 1] == false && isCounting)
                 {              
                     Console.WriteLine(" , End date : " + (day -1 == 0 ? 31: day - 1) + "/" +  ((day-1 == 0) ? month-1:  month));
                     isCounting = false;
                 }
+                //increase day 
                 day++;
+                //calc if month should be increased
                 month += day / 32;
             }           
         }              
