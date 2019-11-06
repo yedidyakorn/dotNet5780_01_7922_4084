@@ -21,7 +21,7 @@ namespace part2
 
             while (choice != 0)
             {
-                Console.WriteLine("Enter Choice: 1-enter new vication.\t 2-show whole list. \t 3-show taken dates.\t 0-exit");//menu
+                Console.WriteLine("\nEnter Choice: 1-enter new vication.\t 2-show whole list. \t 3-show taken dates.\t 0-exit");//menu
 
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -62,12 +62,12 @@ namespace part2
                 Console.WriteLine("ERROR - invalid input.");
                 return;
             }                       
-            if((arr[begD]==true&&arr[begD+1]==true)||(arr[endD]==true&&arr[endD-1]==true))//checks if avalible
+            if((arr[begD]==true&&arr[begD+1]==true)||(arr[endD-1]==true&&arr[endD-2]==true))//checks if avalible
             {
                 Console.WriteLine("not avalible these dates");
                  return;
             }
-            for (int i=begD+1;i<endD-1;i++)//checks if avalible
+            for (int i=begD+1;i<endD-2;i++)//checks if avalible
             {
                 if(arr[i]==true)
                 {
@@ -77,6 +77,7 @@ namespace part2
             }
             for (int i = begD; i < endD; i++)//marks as taken
                 arr[i] = true;
+            Console.WriteLine("vacation was set");
             arrayToMax(max,arr);//converts back to calnder
             return;
             throw new NotImplementedException();
